@@ -1,33 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react';
+import { useSWRConfig } from 'swr'; 
+import ClientList from './components/ClientList'
+import SearchClient from './components/SearchClient'
+import CreateClientDialog from './components/CreateClientDialog';
+import { useClients } from './hooks/useClients';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const { data, error, isLoading } = useClients('http://localhost:3000/clientes');
+  const { mutate } = useSWRConfig();
+ 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="upper-controls">
+        <SearchClient onSearch={setSearchTerm} />
+        <CreateClientDialog updateData={mutate} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {
+        isLoading ? 
+        <CircularProgress sx={{ marginBlockStart: '2em' }} /> : 
+        error ? 
+        <Alert severity='error' sx={{ marginBlockStart: '2em' }}>{error.message}</Alert> : 
+        <ClientList data={data} searchTerm={searchTerm}></ClientList>
+      }
     </>
   )
 }
