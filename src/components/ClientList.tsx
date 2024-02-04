@@ -26,15 +26,15 @@ export default function ClientList({ data, searchTerm }: ClientListProps) {
             {filteredData.map((client: ClientDTO, i: number) => {
                 const shouldDivide = i !== data.length - 1;
                 return (
-                    <>
-                        <ListItem key={client.id} alignItems='flex-start' sx={{ paddingInlineStart: 0 }}>
+                    <div key={client.id}>
+                        <ListItem alignItems='flex-start' sx={{ paddingInlineStart: 0 }}>
                             <ListItemText 
                                 primary={client.name}
                                 secondary={`${client.email} | ${client.phone}`}
                             />
                         </ListItem>
                         {shouldDivide && <Divider variant="inset" component="li" sx={{ width: '70vw', marginInlineStart: 0 }}/>}
-                    </>
+                    </div>
                 )
             })}
         </List>

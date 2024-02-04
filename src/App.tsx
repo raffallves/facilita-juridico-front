@@ -7,6 +7,7 @@ import CreateClientDialog from './components/CreateClientDialog';
 import { useClients } from './hooks/useClients';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
+import ItineraryModal from './components/ItineraryModal';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -15,6 +16,7 @@ function App() {
  
   return (
     <>
+      <ItineraryModal userData={data}/>
       <div className="upper-controls">
         <SearchClient onSearch={setSearchTerm} />
         <CreateClientDialog updateData={mutate} />

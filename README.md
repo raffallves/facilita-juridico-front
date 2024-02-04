@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+# Front End da Aplicação
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta é uma visualização bem simples, composta de uma página com alguns componentes e modais, feita para o teste da empresa Facilita Jurídico.
 
-Currently, two official plugins are available:
+O ambiente de desenvolvimento utilizado é o Vite (devido à sua excelente performance de HMR). A linguagem escolhida foi o Typescript — devido à alta segurança da sua tipagem — com a framework React (um dos requisitos do teste).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Rodando a aplicação
 
-## Expanding the ESLint configuration
+Basta rodar o seguinte comando para rodar o front localmente na porta 5173:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+> [!Atenção]  
+> Caso a url em que o back end da aplicação estiver rodando não for a `http://localhost` na porta `3000`, os seguintes arquivos terão de ser alterados:
+
+- `./src/App.tsx`
+- `./src/components/CreateClientDialog.tsx`
+- `./src/components/ItineraryModal.tsx`
+
+## Melhorias
+
+A seguir estão as melhorias que eu faria caso tivesse mais tempo:
+
+- Configuração para não precisar editar variáveis de ambiente (como a url do servidor) manualmente;
+- Testes com a [react-testing-library](https://testing-library.com/);
+- Identidade visual mais atraente desenhada no `Figma`;
+- Paginação;
+- Algum mecanismo de cache como o [Redis](https://redis.io/), por exemplo;
+- Tela de login e de gerenciamento de conta;
+- Gerenciamento de validação de tokens de acesso;

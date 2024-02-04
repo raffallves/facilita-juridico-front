@@ -60,7 +60,7 @@ export default function CreateClientDialog({ updateData }: { updateData: (url: s
             });
 
             if (!res.ok) {
-                throw new Error(`Houve um erro ao cadastrar o novo cliente. ${res.status}`);
+                throw new Error(`Houve um erro ao cadastrar o novo cliente: ${res.statusText}`);
             }
 
             setLoading(false);
@@ -70,6 +70,7 @@ export default function CreateClientDialog({ updateData }: { updateData: (url: s
 
         } catch (error: any) {
             setLoading(false);
+            console.error(error.message);
             handleOpenSnackbar(`Parece que ocorreu um erro: ${error.message}`, 'error');
         }
     }
